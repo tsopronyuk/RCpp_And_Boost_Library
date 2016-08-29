@@ -9,25 +9,40 @@ Rcpp script to intersect convex polygons using boost::geometry::intersection()
 
 
  1) An R script: polygonTestScript.R
-     a) First the script builds the polygons as R matrices. 
+ 
+     a) First the script builds the polygons as R matrices.
+     
          - Each polygon is stored as a set of xy-coordinates that define the boundary of the convex polygon. 
+         
          - The x-coordinates are the first column in the matrix and the y-coordinates are the second column.
+         
          - The set of polygons is then stored in two different R lists.
+         
          - One of the lists is what will be read by the Rcpp/Cpp script.
+         
          - Two lists are created in order to allow you to test the script with different scenarios. 
 
       b) The R script also contains some ggplot2 code that will allow you to plot the polygons.
        
-       c) Lastly there are two calls to the findIntersections() function.
+      c) Lastly there are two calls to the findIntersections() function.
+      
          - These calls will allow you test the code using the two different lists of polygons that were created at the beginning of the R script. 
 
 2) A cpp script: intersectPolygons.cpp
+
        a) First the script contains some documentation that describes the form of the inputs and outputs. 
+       
        b) Next there a function called findIntersections(). 
+             
               - The code  take the list of polygons from R and then intersect all possible pairs. 
+              
               - The intersection of each pair  stored as a NumericMatrix, with the x-coorinates as the first column and the y-coordinates as the second column.
+              
                - That matrix  stored in a list for output purposes. 
+              
                - Each matrix in the list should be named according to the two polygons that were interesected to generate the matrix. 
+               
                 - For example: When listOfPolygons 1 and listOfPolygons 2 are intersected, the resulting polygon should be stored in the list as "1_intersect_2". 
+   
     c) Once all the intersections are stored in the List it should be returned as shown at the end of the script. 
 
